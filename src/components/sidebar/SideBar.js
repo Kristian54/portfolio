@@ -5,7 +5,6 @@ export default function SideBar() {
         backdrop-blur-sm border bg-white/30 border-white/40 rounded-lg p-10 drop-shadow-lg
         transition-all ease-linear duration-200
         hover:w-1/4 hover:'>
-
         </div>
     )
 }
