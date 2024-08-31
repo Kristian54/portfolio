@@ -4,7 +4,7 @@ import Cursor from "../cursor/Cursor";
 
 export default function Root() {
     return (
-        <div className={'cursor-none'}>
+        <div>
             <SideBar />
             <main>
                 <Outlet />
