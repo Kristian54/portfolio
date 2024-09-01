@@ -3,13 +3,13 @@ import {BsGithub, BsInstagram, BsLinkedin, BsWhatsapp} from "react-icons/bs";
 
 export default function Lander() {
     return (
-        <div className="flex flex-col bg-gradient-to-br from-cyan-500 to-green-500 w-screen h-screen p-4 sm:pr-24">
+        <div className="flex flex-col bg-gradient-to-br from-cyan-500 to-green-500 w-screen sm:h-screen p-4 sm:pr-24">
 
-            <div className="flex flex-row w-full h-full">
+            <div className="flex flex-row w-full h-auto mt-20 sm:mt-0 sm:h-full">
                 <div
                     className="flex flex-col justify-center items-center text-center animate-fly-in-from-bottom flex-1 bg-white/30 border border-white/40 rounded-lg drop-shadow-lg backdrop-blur-sm mb-2">
                     <h1 className={'text-7xl sm:text-9xl font-light text-white'}>Kristian Nærum Garder</h1>
-                    <div className={'flex flex-row absolute bottom-4 space-x-4'}>
+                    <div className={'flex flex-row sm:absolute bottom-0 space-x-4 pb-4 pt-4'}>
                         <MediaIcon icon={<BsGithub color={'white'} size={40}/>} href={'https://github.com/Kristian54'}/>
                         <MediaIcon icon={<BsLinkedin color={'white'} size={40}/>} />
                         <MediaIcon icon={<BsInstagram color={'white'} size={40}/>} href={'https://www.instagram.com/kristiangarder/'}/>
