@@ -1,4 +1,3 @@
-import Cursor from "../../cursor/Cursor";
 
 export default function Lander() {
     return (

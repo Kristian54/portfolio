@@ -2,9 +2,5 @@
 @tailwind components;
 @tailwind utilities;
 
-.body {
-    cursor: none;
-}
-
 @layer components {
 }

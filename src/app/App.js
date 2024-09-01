@@ -1,4 +1,4 @@
-import {createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider, Routes} from "react-router-dom";
+import {createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider} from "react-router-dom";
 import Root from "./Root";
 import Lander from "../pages/lander/Lander";
 import Projects from "../pages/projects/Projects";

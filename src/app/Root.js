@@ -1,6 +1,5 @@
 import {Outlet} from "react-router-dom";
 import SideBar from "../components/sidebar/SideBar";
-import Cursor from "../cursor/Cursor";
 
 export default function Root() {
     return (
