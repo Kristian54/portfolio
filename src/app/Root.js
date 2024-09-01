@@ -3,9 +3,9 @@ import SideBar from "../components/sidebar/SideBar";
 
 export default function Root() {
     return (
-        <div>
+        <div className="flex h-screen">
             <SideBar />
-            <main>
+            <main className="flex-1">
                 <Outlet />
             </main>
         </div>

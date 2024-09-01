@@ -8,7 +8,7 @@ export default function SideBar() {
         flex flex-row sm:flex-col justify-center
         backdrop-blur-sm border bg-white/30 border-white/40 rounded-lg drop-shadow-lg
         transition-all ease-linear duration-200
-        sm:hover:w-80 hover: group'>
+        sm:hover:w-80 hover: group z-40'>
             <NavLink className={'navButton cursor-pointer'} to='/lander'>
                 <SideBarNavButton icon={<BsHouseDoor size={20} color={'white'}/> } text='Home'/>
             </NavLink>
