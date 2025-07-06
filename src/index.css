@@ -1,8 +1,6 @@
 body {
   margin: 0;
-  display: flex;
-  justify-content: center;
-  min-width: 320px;
+  min-width: 300px;
   min-height: 100vh;
 }
 
@@ -10,6 +8,8 @@ body {
   --text: #eeeaea;
 
   --button-text-size: 1.3rem;
+  --element-padding: 0.25rem;
+  --element-border-color: rgba(10, 10, 10, 0.75);
 }
 
 button {
