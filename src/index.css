@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+:root {
+  --text: #eeeaea;
+
+  --button-text-size: 1.3rem;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  font-size: var(--button-text-size);
+  font-family: Inter, sans-serif;
+}
