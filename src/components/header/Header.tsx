@@ -2,9 +2,14 @@ import "./Header.css";
 import {useEffect, useRef, useState} from "react";
 import { motion } from "framer-motion";
 
-const navItems = ["About", "Experience", "Projects", "Contact"];
 
-export const Header = () => {
+interface HeaderProps {
+    navItems: string[],
+    scrollTo: (id: string) => void;
+}
+
+
+export const Header = ({ navItems, scrollTo }) => {
     const [selected, setSelected] = useState<string>(navItems[0]);
     const [indicator, setIndicator] = useState({left: 0, width: 0});
     const refs = useRef<Record<string, HTMLButtonElement | null>>({});
@@ -28,7 +33,7 @@ export const Header = () => {
                     <button
                         key={item}
                         className={`nav-button ${selected === item ? 'active' : ''}`}
-                        onClick={() => {setSelected(item);}}
+                        onClick={() => {setSelected(item); scrollTo(item)}}
                         ref={(el) => (refs.current[item] = el)}
                     >
                         {item}

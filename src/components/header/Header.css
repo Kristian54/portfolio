@@ -5,6 +5,7 @@
 
     will-change: transform, opacity;
 
+    backdrop-filter: blur(15px);
     background-color: var(--element-border-color);
 }
 
