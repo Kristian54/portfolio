@@ -26,16 +26,16 @@
     width: 0;
     border-radius: 50px;
 
-    background-color: rgba(217, 217, 217, 0.2);
+    background-color: rgb(238, 238, 238);
 }
 
 .nav-button {
-    height: 2.5rem;
-    padding: 0px 1rem 0px 1rem;
+    padding: .5rem 1rem .5rem 1rem;
     z-index: 1;
     border-radius: 50px;
 
     color: var(--text);
+    transition: color 1s ease;
 }
 
 .nav-button:hover {
@@ -44,4 +44,8 @@
 
 .nav-button:active {
     background-color: rgba(217, 217, 217, 0.3);
+}
+
+.nav-button.active {
+    color: black;
 }

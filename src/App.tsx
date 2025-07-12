@@ -1,22 +1,26 @@
 import './App.css'
-import {Header} from "./components/header/Header.tsx";
-import {About} from "./components/about/About.tsx";
-import {Contact} from "./components/contact/Contact.tsx";
-import {Experience} from "./components/experience/Experience.tsx";
-import {Hero} from "./components/lander/Hero.tsx";
-import {Projects} from "./components/projects/Projects.tsx";
-import {useEffect, useRef, useState} from "react";
+import {Header} from "./components/navigation/header/Header.tsx";
+import {About} from "./pages/about/About.tsx";
+import {Contact} from "./pages/contact/Contact.tsx";
+import {Experience} from "./pages/experience/Experience.tsx";
+import {Hero} from "./pages/lander/Hero.tsx";
+import {Projects} from "./pages/projects/Projects.tsx";
+import {useEffect, useMemo, useRef, useState} from "react";
 import { motion } from "framer-motion";
+import {ScrollButton} from "./components/navigation/scroll-button/ScrollButton.tsx";
 
 
 
 function App() {
   const heroRef = useRef<HTMLElement | null>(null);
   const [isOnHero, setIsOnHero] = useState(false);
+  const [isAtBottom, setIsAtBottom] = useState(false)
   const [currentSection, setCurrentSection] = useState("Hero")
 
   const navItems = ["About", "Experience", "Projects", "Contact"];
-  const sectionIds = ["Hero", "About", "Experience", "Projects", "Contact"]
+    const sectionIds = useMemo(() => ["Hero", "About", "Experience", "Projects", "Contact"], []);
+
+
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -44,35 +48,48 @@ function App() {
             if (el) observer.observe(el);
         });
 
-        // Sticky header logic
-        const heroEl = heroRef.current;
-        const heroObserver = new IntersectionObserver(
-            ([entry]) => setIsOnHero(!entry.isIntersecting),
-            { threshold: 0.05 }
-        );
-        if (heroEl) heroObserver.observe(heroEl);
+        if (currentSection === "Hero") {
+            setIsOnHero(true);
+        } else {
+            setIsOnHero(false);
+        }
+
+        if (currentSection === "Contact") {
+            setIsAtBottom(true);
+        } else {
+            setIsAtBottom(false);
+        }
 
         return () => {
             observer.disconnect();
-            heroObserver.disconnect();
         };
-    }, []);
+    }, [currentSection, sectionIds]);
 
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
-
-    console.log(currentSection)
-
-    console.log(sectionIds.valueOf())
     if (element) {
       element.scrollIntoView({behavior: 'smooth'})
     }
   }
 
+  const scrollToNextSection = () => {
+      const index = sectionIds.indexOf(currentSection);
+      let element;
+      if (index + 1 < sectionIds.length) {
+          element = document.getElementById(sectionIds[index + 1]);
+      } else {
+          element = document.getElementById(sectionIds[0])
+      }
+
+      if (element) {
+          element.scrollIntoView({behavior: 'smooth'})
+      }
+  }
+
   return (
       <>
-          {isOnHero &&
+          {isOnHero ||
               <motion.div
                   initial={{ opacity: 0, y: -100, x: "-50%" }}
                   animate={{ opacity: 1, y: 0, x: "-50%" }}
@@ -81,6 +98,17 @@ function App() {
                   style={{position: "fixed", top: "1rem", left: "50%", zIndex: 1000 }}
               >
                 <Header navItems={navItems} scrollTo={scrollToSection} activeSection={currentSection}/>
+              </motion.div>
+          }
+          {
+              <motion.div
+                  initial={{ opacity: 0, y: +100, x: "-50%" }}
+                  animate={{ opacity: 1, y: 0, x: "-50%" }}
+                  exit={{ opacity: 0, y: +100, x: "-50%" }}
+                  transition={{ duration: 0.3 }}
+                  style={{position: "fixed", bottom: "1rem", left: "50%", zIndex: 1000}}
+              >
+                  <ScrollButton scrollNext={scrollToNextSection} bottom={isAtBottom}/>
               </motion.div>
           }
         <section ref={heroRef} id={"Hero"}>
