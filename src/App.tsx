@@ -13,25 +13,52 @@ import { motion } from "framer-motion";
 function App() {
   const heroRef = useRef<HTMLElement | null>(null);
   const [isOnHero, setIsOnHero] = useState(false);
+  const [currentSection, setCurrentSection] = useState("Hero")
 
   const navItems = ["About", "Experience", "Projects", "Contact"];
+  const sectionIds = ["Hero", "About", "Experience", "Projects", "Contact"]
 
     useEffect(() => {
-    const observer = new IntersectionObserver(
-        ([entry]) => setIsOnHero(!entry.isIntersecting), {threshold: 0.05}
-    );
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const visibleEntries = entries.filter(entry => entry.isIntersecting);
 
-    const element = heroRef.current;
-    if (element) {
-      observer.observe(element);
-    }
+                if (visibleEntries.length > 0) {
+                    // Compare by visible height instead of ratio
+                    const mostVisible = visibleEntries.reduce((prev, curr) => {
+                        const prevVisibleHeight = prev.intersectionRect.height;
+                        const currVisibleHeight = curr.intersectionRect.height;
+                        return currVisibleHeight > prevVisibleHeight ? curr : prev;
+                    });
 
-    return () => {
-      if (element) {
-        observer.unobserve(element);
-      }
-    }
-  }, [heroRef]);
+                    setCurrentSection(mostVisible.target.id);
+                }
+            },
+            {
+                threshold: Array.from({ length: 101 }, (_, i) => i / 100),
+            }
+        );
+
+        sectionIds.forEach((id) => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
+        });
+
+        // Sticky header logic
+        const heroEl = heroRef.current;
+        const heroObserver = new IntersectionObserver(
+            ([entry]) => setIsOnHero(!entry.isIntersecting),
+            { threshold: 0.05 }
+        );
+        if (heroEl) heroObserver.observe(heroEl);
+
+        return () => {
+            observer.disconnect();
+            heroObserver.disconnect();
+        };
+    }, []);
+
+
 
   const scrollToNextSection = (id: string) => {
 
@@ -40,6 +67,9 @@ function App() {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
 
+    console.log(currentSection)
+
+    console.log(sectionIds.valueOf())
     if (element) {
       element.scrollIntoView({behavior: 'smooth'})
     }
@@ -55,7 +85,7 @@ function App() {
                   transition={{ duration: 0.3 }}
                   style={{position: "fixed", top: "1rem", left: "50%", zIndex: 1000 }}
               >
-                <Header navItems={navItems} scrollTo={scrollToSection}/>
+                <Header navItems={navItems} scrollTo={scrollToSection} activeSection={currentSection}/>
               </motion.div>
           }
         <section ref={heroRef} id={"Hero"}>
