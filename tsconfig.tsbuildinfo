@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/navigation/header/header.tsx","./src/components/navigation/scroll-button/scrollbutton.tsx","./src/pages/about/about.tsx","./src/pages/contact/contact.tsx","./src/pages/experience/experience.tsx","./src/pages/lander/hero.tsx","./src/pages/projects/projects.tsx"],"version":"5.8.3"}

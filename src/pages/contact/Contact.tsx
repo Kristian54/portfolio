@@ -1,8 +1,9 @@
 import "./Contact.css";
+import React from "react";
 
 export const Contact = () => {
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
     }
 
