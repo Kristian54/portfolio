@@ -5,7 +5,7 @@ import {Contact} from "./components/contact/Contact.tsx";
 import {Experience} from "./components/experience/Experience.tsx";
 import {Hero} from "./components/lander/Hero.tsx";
 import {Projects} from "./components/projects/Projects.tsx";
-import React, {useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import { motion } from "framer-motion";
 
 
@@ -58,11 +58,6 @@ function App() {
         };
     }, []);
 
-
-
-  const scrollToNextSection = (id: string) => {
-
-  }
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
