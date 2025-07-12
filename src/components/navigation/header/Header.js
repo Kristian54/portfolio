@@ -1,4 +1,3 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import "./Header.css";
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
@@ -11,5 +10,13 @@ export const Header = ({ navItems, scrollTo, activeSection }) => {
             setIndicator({ left: el.offsetLeft, width: el.offsetWidth });
         }
     }, [activeSection]);
-    return (_jsx("nav", { className: "header", children: _jsxs("div", { className: "nav-container", children: [_jsx(motion.div, { className: "nav-indicator", animate: indicator, transition: { type: "spring", stiffness: 1000, damping: 100 } }), navItems.map((item) => (_jsx("button", { className: `nav-button ${activeSection === item ? 'active' : ''}`, onClick: () => { scrollTo(item); }, ref: (el) => (refs.current[item] = el), children: item }, item)))] }) }));
+    return (<nav className={"header"}>
+            <div className={"nav-container"}>
+                <motion.div className={"nav-indicator"} animate={indicator} transition={{ type: "spring", stiffness: 1000, damping: 100 }}/>
+
+                {navItems.map((item) => (<button key={item} className={`nav-button ${activeSection === item ? 'active' : ''}`} onClick={() => { scrollTo(item); }} ref={(el) => (refs.current[item] = el)}>
+                        {item}
+                    </button>))}
+            </div>
+        </nav>);
 };

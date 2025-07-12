@@ -1,4 +1,3 @@
-import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import './App.css';
 import { Header } from "./components/navigation/header/Header.tsx";
 import { About } from "./pages/about/About.tsx";
@@ -71,7 +70,29 @@ function App() {
             element.scrollIntoView({ behavior: 'smooth' });
         }
     };
-    return (_jsxs(_Fragment, { children: [isOnHero ||
-                _jsx(motion.div, { initial: { opacity: 0, y: -100, x: "-50%" }, animate: { opacity: 1, y: 0, x: "-50%" }, exit: { opacity: 0, y: -100, x: "-50%" }, transition: { duration: 0.3 }, style: { position: "fixed", top: "1rem", left: "50%", zIndex: 1000 }, children: _jsx(Header, { navItems: navItems, scrollTo: scrollToSection, activeSection: currentSection }) }), _jsx(motion.div, { initial: { opacity: 0, y: +100, x: "-50%" }, animate: { opacity: 1, y: 0, x: "-50%" }, exit: { opacity: 0, y: +100, x: "-50%" }, transition: { duration: 0.3 }, style: { position: "fixed", bottom: "1rem", left: "50%", zIndex: 1000 }, children: _jsx(ScrollButton, { scrollNext: scrollToNextSection, bottom: isAtBottom }) }), _jsx("section", { ref: heroRef, id: "Hero", children: _jsx(Hero, {}) }), _jsx("section", { id: "About", children: _jsx(About, {}) }), _jsx("section", { id: "Experience", children: _jsx(Experience, {}) }), _jsx("section", { id: "Projects", children: _jsx(Projects, {}) }), _jsx("section", { id: "Contact", children: _jsx(Contact, {}) })] }));
+    return (<>
+          {isOnHero ||
+            <motion.div initial={{ opacity: 0, y: -100, x: "-50%" }} animate={{ opacity: 1, y: 0, x: "-50%" }} exit={{ opacity: 0, y: -100, x: "-50%" }} transition={{ duration: 0.3 }} style={{ position: "fixed", top: "1rem", left: "50%", zIndex: 1000 }}>
+                <Header navItems={navItems} scrollTo={scrollToSection} activeSection={currentSection}/>
+              </motion.div>}
+          {<motion.div initial={{ opacity: 0, y: +100, x: "-50%" }} animate={{ opacity: 1, y: 0, x: "-50%" }} exit={{ opacity: 0, y: +100, x: "-50%" }} transition={{ duration: 0.3 }} style={{ position: "fixed", bottom: "1rem", left: "50%", zIndex: 1000 }}>
+                  <ScrollButton scrollNext={scrollToNextSection} bottom={isAtBottom}/>
+              </motion.div>}
+        <section ref={heroRef} id={"Hero"}>
+          <Hero />
+        </section>
+        <section id={"About"}>
+          <About />
+        </section>
+        <section id={"Experience"}>
+          <Experience />
+        </section>
+        <section id={"Projects"}>
+          <Projects />
+        </section>
+        <section id={"Contact"}>
+          <Contact />
+        </section>
+      </>);
 }
 export default App;
